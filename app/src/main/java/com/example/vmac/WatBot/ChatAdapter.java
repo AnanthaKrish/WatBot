@@ -1,4 +1,4 @@
-package com.example.vmac.chatbot;
+package com.example.vmac.WatBot;
 
 /**
  * Created by VMac on 17/11/16.
@@ -14,25 +14,14 @@ import java.util.ArrayList;
 
 
 
-public class ChatRoomThreadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     private int SELF = 100;
     private ArrayList<Message> messageArrayList;
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView message;
-
-        public ViewHolder(View view) {
-            super(view);
-            message = (TextView) itemView.findViewById(R.id.message);
-            //timestamp = (TextView) itemView.findViewById(R.id.timestamp);
-        }
-    }
-
-
-    public ChatRoomThreadAdapter(ArrayList<Message> messageArrayList) {
+    public ChatAdapter(ArrayList<Message> messageArrayList) {
         this.messageArrayList=messageArrayList;
 
     }
@@ -50,13 +39,12 @@ public class ChatRoomThreadAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         } else {
             // WatBot message
             itemView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.chat_item_watson2, parent, false);
+                    .inflate(R.layout.chat_item_watson, parent, false);
         }
 
 
         return new ViewHolder(itemView);
     }
-
 
     @Override
     public int getItemViewType(int position) {
@@ -73,22 +61,21 @@ public class ChatRoomThreadAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         Message message = messageArrayList.get(position);
         message.setMessage(message.getMessage());
         ((ViewHolder) holder).message.setText(message.getMessage());
-
-       /* if(message.getId().equals("2"))
-        {
-            String timestamp = "Watson Says";
-            ((ViewHolder) holder).timestamp.setText(timestamp);
-        }*/
         }
-
-
 
     @Override
     public int getItemCount() {
-       // if(messageArrayList !=null) {
             return messageArrayList.size();
-        //}
-       // return 1;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView message;
+
+        public ViewHolder(View view) {
+            super(view);
+            message = (TextView) itemView.findViewById(R.id.message);
+
+        }
     }
 
 
